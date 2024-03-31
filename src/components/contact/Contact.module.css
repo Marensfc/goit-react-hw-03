@@ -1,0 +1,34 @@
+.contactListItem {
+  border: 1px solid black;
+  width: 250px;
+  padding: 10px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.contactListItem button {
+  width: 60px;
+  padding: 5px;
+  cursor: pointer;
+  border-radius: 2px;
+  border: none;
+  border: 1px solid gray;
+}
+
+.contactNameWrap,
+.contactTelWrap {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.contactNameWrap {
+  margin-bottom: 10px;
+}
+
+.contactInfo {
+  display: flex;
+  flex-direction: column;
+}
