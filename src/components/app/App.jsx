@@ -23,7 +23,7 @@ function App() {
     return savedContacts;
   });
 
-  const [sortedContacts, setSortedContacts] = useState(contacts);
+  const [filterValue, setFilterValue] = useState("");
 
   useEffect(() => {
     window.localStorage.setItem("contacts", JSON.stringify(contacts));
@@ -33,7 +33,6 @@ function App() {
     const newContacts = [...contacts, newContact];
 
     setContacts(newContacts);
-    setSortedContacts(newContacts);
   };
 
   const deleteContact = contactId => {
@@ -42,23 +41,20 @@ function App() {
     });
 
     setContacts(updatedContacts);
-    setSortedContacts(updatedContacts);
   };
 
-  const searchContactByName = searchValue => {
-    const foundContacts = contacts.filter(contact => {
-      return contact.name.toLowerCase().includes(searchValue.toLowerCase());
-    });
+  const filteredContacts = contacts.filter(contact => {
+    return contact.name.toLowerCase().includes(filterValue.toLowerCase());
+  });
 
-    setSortedContacts(foundContacts);
-  };
+  console.log(filteredContacts);
 
   return (
     <div className={css.appContainer}>
       <h1>Phonebook</h1>
       <ContactForm addContact={addContact} />
-      <SearchBox inSearch={searchContactByName} />
-      <ContactList contacts={sortedContacts} deleteContact={deleteContact} />
+      <SearchBox filterValue={filterValue} setFilterValue={setFilterValue} />
+      <ContactList contacts={filteredContacts} deleteContact={deleteContact} />
     </div>
   );
 }
