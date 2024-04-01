@@ -1,8 +1,9 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as yup from "yup";
+import css from "./ContactForm.module.css";
+
 import { useId } from "react";
 import { v4 as uuidv4 } from "uuid";
-import css from "./ContactForm.module.css";
 
 const initialValues = {
   name: "",
@@ -18,6 +19,7 @@ const contactSchema = yup.object().shape({
     .required("Name is a required field"),
   number: yup
     .string()
+    .matches(/[0-9]{3}-[0-9]{2}-[0-9]{2}/, "must be 000-00-00 format")
     .max(9, "Must not be more than 9 digits")
     .required("Number is a required field"),
 });
@@ -42,7 +44,7 @@ const ContactForm = ({ addContact }) => {
         <Form className={css.form}>
           <div className={css.formInputWrapper}>
             <label htmlFor={fieldNameId}>Name</label>
-            <Field name="name" id={fieldNameId} />
+            <Field name="name" id={fieldNameId} placeholder="Name" />
             <ErrorMessage
               name="name"
               component="p"
@@ -52,7 +54,12 @@ const ContactForm = ({ addContact }) => {
 
           <div className={css.formInputWrapper}>
             <label htmlFor={fieldNumberId}>Number</label>
-            <Field type="number" name="number" id={fieldNumberId} />
+            <Field
+              type="tel"
+              name="number"
+              id={fieldNumberId}
+              placeholder="123-45-67"
+            />
             <ErrorMessage
               name="number"
               component="p"

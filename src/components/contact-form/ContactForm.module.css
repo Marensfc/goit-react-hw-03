@@ -27,6 +27,7 @@ div.formInputWrapper input {
   height: 30px;
   border-radius: 4px;
   border: 1px solid black;
+  outline: transparent;
 }
 
 .form button {
